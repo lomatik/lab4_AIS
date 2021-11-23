@@ -1,4 +1,6 @@
 # LAB_4_RALENKO
+# FIRST PART
+#SECOND PART AVAIBLE IN FILE main2.py with runconfig for main2.py
 import random
 import matplotlib.pyplot as plt
 from deap import base
@@ -17,10 +19,6 @@ RANDOM_SEED = 32
 random.seed(RANDOM_SEED)
 
 # Attribute generator
-#                      define 'attr_bool' to be an attribute ('gene')
-#                      which corresponds to integers sampled uniformly
-#                      from the range [0,1] (i.e. 0 or 1 with equal
-#                      probability)
 toolbox = base.Toolbox()
 toolbox.register("zeroOrOne", random.randint, 0, 1)
 
@@ -28,8 +26,8 @@ creator.create("FitnessMax", base.Fitness, weights=(1.0,))
 creator.create("Individual", list, fitness=creator.FitnessMax)
 
 # Structure initializers
-#                         define 'individual' to be an individual
-#                         consisting of 100 'attr_bool' elements ('genes')
+# define 'individual' to be an individual
+# consisting of 100 'attr_bool' elements ('genes')
 toolbox.register("individualCreator", tools.initRepeat, creator.Individual, toolbox.zeroOrOne, ONE_MAX_LENGTH)
 
 # define the population to be a list of individuals
@@ -71,11 +69,6 @@ def main():
     population = toolbox.populationCreator(n=POPULATION_SIZE)
 
     fitnessValues = list(map(toolbox.evaluate, population))
-
-    # CXPB  is the probability with which two individuals
-    #       are crossed
-    #
-    # MUTPB is the probability for mutating an individual
 
     print("Start of evolution")
 
@@ -136,7 +129,7 @@ def main():
         # The population is entirely replaced by the offspring
         population[:] = offspring
 
-        # Gather all the fitnesses in one list and print the stats
+        # Gather all the fitnessValues in one list and print the stats
         fitnessValues = [ind.fitness.values[0] for ind in population]
 
         maxFitness = max(fitnessValues)
